@@ -1,8 +1,8 @@
 Gem::Specification.new do |spec|
   spec.name          = "shopify_liquid_test_helper"
   spec.version       = "0.1.0"
-  spec.authors       = ["Your Name"]
-  spec.email         = ["your.email@example.com"]
+  spec.authors       = ["Ken Takagiwa"]
+  spec.email         = ["ugw.gi.world@gmail.com"]
 
   spec.summary       = "A helper for testing Shopify Liquid templates"
   spec.description   = "This gem provides helper methods and custom tags for testing Shopify Liquid templates"
