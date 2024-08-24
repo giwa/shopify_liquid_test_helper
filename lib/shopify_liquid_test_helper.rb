@@ -10,11 +10,8 @@ module ShopifyLiquidTestHelper
       Liquid::Template.parse(File.read(template_name))
     end
 
-    def render_template(template, assigns)
-      template.render(assigns).strip
-    end
-
     def register_custom_tags
+      # TODO: separate tag implementations
       Liquid::Template.register_tag('render', RenderTag)
       Liquid::Template.register_tag('capture', CaptureTag)
     end

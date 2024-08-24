@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe ShopifyLiquidTestHelper do
+RSpec.describe ShopifyLiquidTestHelper::RenderTag do
   before(:all) do
     ShopifyLiquidTestHelper.register_custom_tags
     ShopifyLiquidTestHelper.register_snippet('simple', 'Hello, {{ name }}!')

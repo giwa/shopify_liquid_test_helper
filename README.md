@@ -2,6 +2,14 @@
 
 ShopifyLiquidTestHelper is a Ruby gem designed to assist in testing Shopify Liquid templates. It provides custom Liquid tags and helper methods that simulate Shopify-specific functionality, making it easier to test your Liquid templates in isolation.
 
+## Tag Status
+
+| Tag | Status |
+| --- | ------ |
+| `render` | ✅ |
+| `capture` | ✅ |
+
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -53,7 +61,7 @@ RSpec.describe "Product template" do
   it "renders the product title" do
     template = "{% render 'product_title' %}"
     assigns = { 'product' => { 'title' => 'Awesome T-Shirt' } }
-    result = ShopifyLiquidTestHelper.render_template(Liquid::Template.parse(template), assigns)
+    result = Liquid::Template.parse(template).render(assigns)
     expect(result).to eq '<h1>Awesome T-Shirt</h1>'
   end
 end
@@ -70,7 +78,7 @@ RSpec.describe "Collection template" do
   it "renders a list of product titles" do
     template = "{% render 'product_list' for products %}"
     assigns = { 'products' => [{ 'title' => 'Shirt' }, { 'title' => 'Pants' }] }
-    result = ShopifyLiquidTestHelper.render_template(Liquid::Template.parse(template), assigns)
+    result = Liquid::Template.parse(template).render(assigns)
     expect(result).to eq 'ShirtPants'
   end
 end
@@ -83,7 +91,7 @@ RSpec.describe "Capture tag" do
   it "captures content into a variable" do
     template = "{% capture my_variable %}Hello, {{ name }}!{% endcapture %}{{ my_variable }}"
     assigns = { 'name' => 'World' }
-    result = ShopifyLiquidTestHelper.render_template(Liquid::Template.parse(template), assigns)
+    result = Liquid::Template.parse(template).render(assigns)
     expect(result).to eq 'Hello, World!'
   end
 end
@@ -121,7 +129,7 @@ RSpec.describe "Product listing" do
         'price' => 1999
       }
     }
-    result = ShopifyLiquidTestHelper.render_template(Liquid::Template.parse(template), assigns)
+    result = Liquid::Template.parse(template).render(assigns)
     expect(result).to include('Awesome T-Shirt')
     expect(result).to include('Price: $19.99')
   end
@@ -161,7 +169,7 @@ RSpec.describe "Mixed snippet sources" do
         'price' => 2499
       }
     }
-    result = ShopifyLiquidTestHelper.render_template(Liquid::Template.parse(template), assigns)
+    result = Liquid::Template.parse(template).render(assigns)
     expect(result).to include('This is an inline snippet')
     expect(result).to include('Cool Product')
     expect(result).to include('Price: $24.99')
