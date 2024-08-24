@@ -138,6 +138,61 @@ end
 
 ShopifyLiquidTestHelper will automatically load the `product_card` snippet from the `snippets` directory when you use the `render` tag in your Liquid template.
 
+
+### Mocking render with `allow` in RSpec
+
+ShopifyLiquidTestHelper provides functionality to mock Liquid snippets using RSpec's `allow` method. This is particularly useful when testing templates that depend on other snippets.
+
+Here's a simple example of how to use `allow` for mocking:
+
+```liquid
+<!-- snippets/product.liquid -->
+<div class="product">
+  <h1>{{ product.title }}</h1>
+  <div class="price">
+    {% render 'product_price' %}
+  </div>
+  <div class="description">
+    {{ product.description }}
+  </div>
+  {% if product.available %}
+    <button type="button" class="add-to-cart">Add to Cart</button>
+  {% else %}
+    <p>Sold Out</p>
+  {% endif %}
+</div>
+```
+
+
+```ruby
+RSpec.describe 'ProductTemplate' do
+  let(:template) { ShopifyLiquidTestHelper.parse_template('snippets/product.liquid') }
+  let(:product) { { 'title' => 'Test Product', 'price' => 1000 } }
+
+  before do
+    # Mock the 'product_price' snippet to return a formatted price
+    allow(ShopifyLiquidTestHelper).to receive(:get_snippet).with('product_price').and_return('{{ product.price | money }}')
+  end
+
+  it 'renders the product title and price' do
+    rendered = template.render('product' => product)
+    expect(rendered).to include('Test Product')
+    expect(rendered).to include('$10.00')
+  end
+
+  context 'when the product is on sale' do
+    before do
+      # Override the mock for a specific test
+      allow(ShopifyLiquidTestHelper).to receive(:get_snippet).with('product_price').and_return('On Sale: {{ product.price | money }}')
+    end
+
+    it 'shows the sale price' do
+      rendered = template.render('product' => product)
+      expect(rendered).to include('On Sale: $10.00')
+    end
+  end
+end
+
 ### Customizing the Snippets Directory
 
 If your snippets are located in a different directory, you can specify the path when initializing ShopifyLiquidTestHelper:
@@ -216,7 +271,7 @@ This gem allows you to test your Shopify Liquid templates thoroughly, ensuring t
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/yourusername/shopify_liquid_test_helper.
+Bug reports and pull requests are welcome on GitHub at https://github.com/giwa/shopify_liquid_test_helper.
 
 ## License
 

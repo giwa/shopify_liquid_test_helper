@@ -1,12 +1,12 @@
 Gem::Specification.new do |spec|
   spec.name          = "shopify_liquid_test_helper"
-  spec.version       = "0.1.0"
+  spec.version       = "0.1.1"
   spec.authors       = ["Ken Takagiwa"]
   spec.email         = ["ugw.gi.world@gmail.com"]
 
   spec.summary       = "A helper for testing Shopify Liquid templates"
   spec.description   = "This gem provides helper methods and custom tags for testing Shopify Liquid templates"
-  spec.homepage      = "https://github.com/yourusername/shopify_liquid_test_helper"
+  spec.homepage      = "https://github.com/giwa/shopify_liquid_test_helper"
   spec.license       = "MIT"
 
   spec.files         = Dir.glob("{lib,spec}/**/*") + %w(README.md Rakefile)
