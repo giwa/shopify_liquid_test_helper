@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = "shopify_liquid_test_helper"
-  spec.version       = "0.1.1"
+  spec.version       = "0.2.0"
   spec.authors       = ["Ken Takagiwa"]
   spec.email         = ["ugw.gi.world@gmail.com"]
 
@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "liquid", "~> 5.0"
-  spec.add_dependency "shopify_liquid_tags", "~> 5.0"
+  spec.add_dependency "shopify_liquid_simulator", "~> 0.1.0"
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "rake", "~> 13.0"
 end

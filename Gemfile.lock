@@ -1,8 +1,9 @@
 PATH
   remote: .
   specs:
-    shopify_liquid_test_helper (0.1.1)
+    shopify_liquid_test_helper (0.2.0)
       liquid (~> 5.0)
+      shopify_liquid_simulator (~> 0.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -23,6 +24,8 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
     rspec-support (3.13.1)
+    shopify_liquid_simulator (0.1.0)
+      liquid (~> 5.0)
 
 PLATFORMS
   x86_64-linux

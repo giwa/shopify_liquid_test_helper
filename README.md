@@ -2,12 +2,9 @@
 
 ShopifyLiquidTestHelper is a Ruby gem designed to assist in testing Shopify Liquid templates. It provides custom Liquid tags and helper methods that simulate Shopify-specific functionality, making it easier to test your Liquid templates in isolation.
 
-## Tag Status
+## Implementation Status
 
-| Tag | Status |
-| --- | ------ |
-| `render` | ✅ |
-
+See: https://github.com/giwa/shopify_liquid_simulator?tab=readme-ov-file#implementation-status
 
 ## Installation
 
@@ -138,9 +135,9 @@ end
 ShopifyLiquidTestHelper will automatically load the `product_card` snippet from the `snippets` directory when you use the `render` tag in your Liquid template.
 
 
-### Mocking render with `allow` in RSpec
+### Mocking render
 
-ShopifyLiquidTestHelper provides functionality to mock Liquid snippets using RSpec's `allow` method. This is particularly useful when testing templates that depend on other snippets.
+ShopifyLiquidTestHelper provides functionality to mock Liquid snippets using ShopifyLiquidTestHelper.register_snippet method. This is particularly useful when testing templates that depend on other snippets.
 
 Here's a simple example of how to use `allow` for mocking:
 
@@ -170,7 +167,7 @@ RSpec.describe 'ProductTemplate' do
 
   before do
     # Mock the 'product_price' snippet to return a formatted price
-    allow(ShopifyLiquidTestHelper).to receive(:get_snippet).with('product_price').and_return('{{ product.price | money }}')
+    ShopifyLiquidTestHelper.register_snippet('product_price', '{{ product.price | money }}')
   end
 
   it 'renders the product title and price' do
@@ -182,7 +179,7 @@ RSpec.describe 'ProductTemplate' do
   context 'when the product is on sale' do
     before do
       # Override the mock for a specific test
-      allow(ShopifyLiquidTestHelper).to receive(:get_snippet).with('product_price').and_return('On Sale: {{ product.price | money }}')
+      ShopifyLiquidTestHelper.register_snippet('product_price', 'On Sale: {{ product.price | money }}')
     end
 
     it 'shows the sale price' do

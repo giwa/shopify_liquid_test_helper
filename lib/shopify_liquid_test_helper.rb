@@ -1,4 +1,4 @@
-require 'shopify_liquid_tags'
+require 'shopify_liquid_simulator'
 require 'liquid'
 
 module ShopifyLiquidTestHelper
@@ -11,8 +11,8 @@ module ShopifyLiquidTestHelper
     end
 
     def register_custom_tags
-      ShopifyLiquidTags.register_tags
-      ShopifyLiquidTags::RenderTag.snippet_provider = method(:get_snippet)
+      ShopifyLiquidSimulator.register_tags
+      ShopifyLiquidSimulator::Render.snippet_provider = method(:get_snippet)
     end
 
     def register_snippet(name, content)
