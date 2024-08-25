@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    shopify_liquid_test_helper (0.1.0)
+    shopify_liquid_test_helper (0.1.1)
       liquid (~> 5.0)
 
 GEM

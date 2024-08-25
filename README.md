@@ -7,7 +7,6 @@ ShopifyLiquidTestHelper is a Ruby gem designed to assist in testing Shopify Liqu
 | Tag | Status |
 | --- | ------ |
 | `render` | ✅ |
-| `capture` | ✅ |
 
 
 ## Installation

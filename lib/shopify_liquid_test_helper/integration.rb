@@ -1,0 +1,1 @@
+require 'shopify_liquid_test_helper/rspec_configuration'
